@@ -3,6 +3,7 @@ stages:
     - test
 
 package_job:
+    stage: build
     image: maven:latest
     script:
         - echo "Packaging....."
@@ -17,6 +18,7 @@ package_job:
         - when: manual    
 
 test_job:
+    stage: test
     script:
         - echo "Testing...."
         - ls target/*
