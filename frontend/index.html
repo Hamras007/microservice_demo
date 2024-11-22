@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Microservices Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 5px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .response {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+  <h1>Microservices Demo</h1>
+  <p>Click the buttons below to fetch data from the microservices:</p>
+
+  <button id="fetch-users">Fetch Users</button>
+  <button id="fetch-products">Fetch Products</button>
+
+  <div id="response" class="response"></div>
+
+  <script>
+    // Fetch and display users
+    document.getElementById('fetch-users').addEventListener('click', () => {
+      fetch('http://192.168.94.14:8081/users') // User Service URL
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('response').innerText = `Users: ${data}`;
+        })
+        .catch(error => {
+          document.getElementById('response').innerText = `Error: ${error}`;
+        });
+    });
+
+    // Fetch and display products
+    document.getElementById('fetch-products').addEventListener('click', () => {
+      fetch('http://192.168.94.14:8082/products') // Product Service URL
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('response').innerText = `Products: ${data}`;
+        })
+        .catch(error => {
+          document.getElementById('response').innerText = `Error: ${error}`;
+        });
+    });
+  </script>
+</body>
+</html>
+
