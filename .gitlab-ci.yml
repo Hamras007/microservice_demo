@@ -7,15 +7,19 @@ package_job:
     script:
         - echo "Packaging....."
         - mvn --version
-        - mvn -f userclean pak
+        - mvn -f user-service/pom.xml clean package
     tags:
         - Docker
+    artifacts:
+        paths:
+            - target/    
     rules:
         - when: manual    
 
 test_job:
     script:
         - echo "Testing...."
+        - ls target/*
     tags:
         - Docker    
     rules:
