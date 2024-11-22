@@ -1,0 +1,9 @@
+stages:
+    - build
+    - test
+
+test_job:
+    script:
+        - echo "Testing...."
+    tags:
+        - Docker    
