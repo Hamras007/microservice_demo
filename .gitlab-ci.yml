@@ -2,8 +2,21 @@ stages:
     - build
     - test
 
+package_job:
+    image: maven:latest
+    script:
+        - echo "Packaging....."
+        - mvn --version
+        - mvn -f userclean pak
+    tags:
+        - Docker
+    rules:
+        - when: manual    
+
 test_job:
     script:
         - echo "Testing...."
     tags:
         - Docker    
+    rules:
+        - when: manual    
