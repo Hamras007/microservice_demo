@@ -11,7 +11,7 @@ package_job:
         - Docker
     artifacts:
         paths:
-            - user-service/target/    
+            - target/    
     rules:
         - when: manual    
 
@@ -19,7 +19,7 @@ test_job:
     stage: test
     script:
         - echo "Testing...."
-        - ls user-service/target/*
+        - ls target/*
     tags:
         - Docker    
     rules:
