@@ -5,7 +5,7 @@ stages:
 package_job:
     stage: build
     image: maven:latest
-    script:
+    script: 
         - mvn -f user-service/pom.xml clean package
     tags:
         - Docker
