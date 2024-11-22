@@ -6,14 +6,12 @@ package_job:
     stage: build
     image: maven:latest
     script:
-        - echo "Packaging....."
-        - mvn --version
         - mvn -f user-service/pom.xml clean package
     tags:
         - Docker
     artifacts:
         paths:
-            - target/    
+            - user-service/target/    
     rules:
         - when: manual    
 
@@ -21,7 +19,7 @@ test_job:
     stage: test
     script:
         - echo "Testing...."
-        - ls target/*
+        - ls user-service/target/*
     tags:
         - Docker    
     rules:
