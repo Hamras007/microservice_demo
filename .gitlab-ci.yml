@@ -9,6 +9,7 @@ package_job:
     script: 
         - mvn -f user-service/pom.xml clean package
         - ls -R user-service/target/
+        - 
     tags: 
         - Docker_Runner
     artifacts:
