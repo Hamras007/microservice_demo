@@ -1,9 +1,10 @@
 stages:
-    - build
+    - package
+    - build   
     - test
 
 package_job:
-    stage: build
+    stage: package
     image: maven:latest
     script: 
         - mvn -f user-service/pom.xml clean package
@@ -16,7 +17,24 @@ package_job:
     rules:
         - when: manual    
 
+docekr_build:
+    stage: build
+    imgae: docker:latest
+    service:
+        - name: docker:dind
+    variables:
+        DOCKER_DRIVER: "overlay2"
+        DOCKER_TLS_CERTDIR: ""    
+    
+    before_script:
+        - docker ps
+        - docker build -t java_app:latest .
+        
+    script:
+        - docker run java_app:latest
+
 test_job:
+    image: 
     stage: test
     script:
         - echo "Testing...."
