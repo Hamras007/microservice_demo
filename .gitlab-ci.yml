@@ -12,7 +12,7 @@ package_job:
         - Docker_Runner
     artifacts:
         paths:
-            - user-sevice/target/    
+            - user-service/target/    
     rules:
         - when: manual    
 
