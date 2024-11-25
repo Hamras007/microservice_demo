@@ -1,4 +1,5 @@
-FROM openjdk:18
+FROM maven:latest
 RUN mkdir /app
-COPY user-service/target/user-service-1.0.0.jar /app/user-service-1.0.0.jar
-CMD ["java","-jar","/app/user-service-1.0.0.jar","&"]
+COPY ./user-service /app
+WORKDIR /app
+CMD ["mvn","clean","sprint-boot:run"]
