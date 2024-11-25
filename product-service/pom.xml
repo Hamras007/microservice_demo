@@ -3,6 +3,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- Parent Spring Boot POM -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.1.2</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
     <groupId>com.example</groupId>
     <artifactId>product-service</artifactId>
     <version>1.0.0</version>
@@ -10,7 +18,6 @@
 
     <name>Monolithic App</name>
     <description>A simple monolithic application</description>
-
 
     <properties>
         <java.version>18</java.version>
@@ -21,7 +28,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>3.1.2</version>
         </dependency>
     </dependencies>
 
@@ -31,7 +37,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>3.1.2</version>
             </plugin>
 
             <!-- Maven Compiler Plugin for Java version compatibility -->
@@ -47,4 +52,3 @@
         </plugins>
     </build>
 </project>
-
