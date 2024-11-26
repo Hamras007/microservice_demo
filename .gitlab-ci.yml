@@ -28,11 +28,12 @@ docker_build:
         DOCKER_TLS_CERTDIR: ""    
     
     before_script:
-        
+        - pwd
+        - ls -l
         - docker build -t java_app:latest .
         
     script:
-        - docker run java_app:latest
+        - docker run java_app:latest ls -R
     tags:
         - Docker_Runner    
     rules:
