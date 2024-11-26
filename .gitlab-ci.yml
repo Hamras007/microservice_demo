@@ -18,7 +18,7 @@ stages:
     rules:
         - when: manual    
 
-docker_build:
+docker_build_user:
     stage: build
     image: docker:latest
     services:
@@ -38,6 +38,28 @@ docker_build:
         - Docker_Runner    
     rules:
         - when: manual    
+
+docker_build_product:
+    stage: build
+    image: docker:latest
+    services:
+        - name: docker:dind
+    variables:
+        DOCKER_DRIVER: "overlay2"
+        DOCKER_TLS_CERTDIR: ""    
+    
+    before_script:
+        - pwd
+        - ls -l
+        - docker build -t java_app:latest -f Dockerfile.user .
+        
+    script:
+        - docker run java_app:latest 
+    tags:
+        - Docker_Runner    
+    rules:
+        - when: manual    
+
 
 test_job:
     image: 
