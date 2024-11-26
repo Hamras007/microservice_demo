@@ -53,7 +53,7 @@ variables:
   - cat $KUBE_CONFIG > ~/.kube/config
   - chown $(id -u):$(id -g) $HOME/.kube/config
   # Change Ip address and master hostname
-  - echo "192.168.94.10   master" >>/etc/hosts 
+  - echo "192.168.94.17 kubemaster" >>/etc/hosts 
 
 ################################################################################################################
 
@@ -73,6 +73,22 @@ docker_build_product:
         - when: manual    
         
 ################################################################################################################
+
+kubernetes_deploy:
+  stage: deploy
+  image: docker:latest  
+  before_script:
+      - kubectl get nodes
+        
+  script:
+      - kubectl apply -f k8s/deployment.yaml    
+  tags:
+    - Kubernetes
+  rules:
+      - when: manual  
+
+################################################################################################################
+
 
 .test_job:
     image: 
