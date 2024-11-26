@@ -3,6 +3,15 @@ stages:
     - build   
     - test
 
+services:
+    - docker:dind
+
+variables:
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ""
+
+
 ################################################################################################################
 
 .package_job:
@@ -25,15 +34,7 @@ stages:
 .docker_build_user:
     stage: build
     image: docker:latest
-    services:
-        - name: docker:dind
-    variables:
-        DOCKER_DRIVER: "overlay2"
-        DOCKER_TLS_CERTDIR: ""    
-    
     before_script:
-        - pwd
-        - ls -l
         - docker build -t user_app:latest -f Dockerfile.product .
         
     script:
@@ -59,15 +60,7 @@ stages:
 docker_build_product:
     stage: build
     image: docker:latest
-    services:
-        - name: docker:dind
-    variables:
-        DOCKER_DRIVER: "overlay2"
-        DOCKER_TLS_CERTDIR: ""    
-    
     before_script:
-        - pwd
-        - ls -l
         - docker build -t product_app:latest -f Dockerfile.user .
         
     script:
