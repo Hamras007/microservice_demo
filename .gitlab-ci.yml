@@ -36,7 +36,7 @@ variables:
     stage: build
     image: docker:latest
     before_script:
-        - docker build -t user_app:latest -f Dockerfile.product .
+        - docker build -t user_app:latest -f Dockerfile.user .
         
     script:
         - docker run -d user_app:latest 
@@ -62,7 +62,7 @@ docker_build_product:
     stage: build
     image: docker:latest
     before_script:
-        - docker build -t product_app:latest -f Dockerfile.user .
+        - docker build -t product_app:latest -f Dockerfile.product .
         
     script:
         - echo $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin registry.gitlab.com
