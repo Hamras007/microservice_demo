@@ -79,6 +79,7 @@ kubernetes_deploy:
   stage: deploy
   image: docker:latest  
   before_script:
+      - *kubeauth
       - kubectl get nodes
         
   script:
