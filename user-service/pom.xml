@@ -20,7 +20,7 @@
     <description>A simple monolithic application</description>
 
     <properties>
-        <java.version>18</java.version>
+        <java.version>21.0.5</java.version>
     </properties>
 
     <dependencies>
