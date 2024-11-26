@@ -30,14 +30,13 @@ docker_build_user:
     before_script:
         - pwd
         - ls -l
-        - docker build -t java_app:latest -f Dockerfile.product .
+        - docker build -t user_app:latest -f Dockerfile.product .
         
     script:
-        - docker run -d product_app:latest 
+        - docker run -d user_app:latest 
     tags:
         - Docker_Runner    
-    rules:
-        - when: manual    
+    
 
 docker_build_product:
     stage: build
@@ -51,17 +50,16 @@ docker_build_product:
     before_script:
         - pwd
         - ls -l
-        - docker build -t java_app:latest -f Dockerfile.user .
+        - docker build -t product_app:latest -f Dockerfile.user .
         
     script:
-        - docker run -d user_app:latest 
+        - docker run -d product_app:latest 
     tags:
         - Docker_Runner    
-    rules:
-        - when: manual    
+        
 
 
-test_job:
+.test_job:
     image: 
     stage: test
     script:
