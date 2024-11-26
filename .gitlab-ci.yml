@@ -1,6 +1,7 @@
 stages:
     - package
     - build   
+    - deploy
     - test
 
 services:
