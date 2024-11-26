@@ -76,8 +76,9 @@ docker_build_product:
 
 kubernetes_deploy:
   stage: deploy
-  image: docker:latest  
+  image: alpine:latest  
   before_script:
+      - apk add curl
       - *kubeauth
       - kubectl get nodes
         
