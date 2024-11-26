@@ -16,4 +16,4 @@ spec:
         - name: user-app
           image: registry.gitlab.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/product_app:latest  
           ports:
-            - containerPort: 8081
+            - containerPort: 8082
