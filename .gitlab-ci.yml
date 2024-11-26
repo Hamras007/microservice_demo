@@ -3,6 +3,8 @@ stages:
     - build   
     - test
 
+################################################################################################################
+
 .package_job:
     stage: package
     image: maven:latest
@@ -17,6 +19,8 @@ stages:
             - user-service/target/    
     rules:
         - when: manual    
+
+################################################################################################################
 
 .docker_build_user:
     stage: build
@@ -36,7 +40,21 @@ stages:
         - docker run -d user_app:latest 
     tags:
         - Kubernetes
-    
+
+################################################################################################################
+
+.k8s_auth: &kubeauth
+  - export KUBE_VERSION=$(curl https://storage.googleapis.com/kubernetes-release/release/stable.txt)
+  - echo $KUBE_VERSION
+  - curl -o /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/"${KUBE_VERSION}"/bin/linux/amd64/kubectl
+  - chmod a+x /usr/local/bin/kubectl
+  - mkdir -p ~/.kube
+  - cat $KUBE_CONFIG > ~/.kube/config
+  - chown $(id -u):$(id -g) $HOME/.kube/config
+  # Change Ip address and master hostname
+  - echo "192.168.94.10   master" >>/etc/hosts 
+
+################################################################################################################
 
 docker_build_product:
     stage: build
@@ -58,8 +76,10 @@ docker_build_product:
         - docker push registry.gitlab.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/product_app:latest
     tags:
         - Kubernetes 
+    rules:
+        - when: manual    
         
-
+################################################################################################################
 
 .test_job:
     image: 
