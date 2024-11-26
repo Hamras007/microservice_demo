@@ -3,7 +3,7 @@ stages:
     - build   
     - test
 
-package_job:
+.package_job:
     stage: package
     image: maven:latest
     script: 
@@ -35,6 +35,8 @@ docker_build:
         - docker run java_app:latest
     tags:
         - Docker_Runner    
+    rules:
+        - when: manual    
 
 test_job:
     image: 
