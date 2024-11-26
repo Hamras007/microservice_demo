@@ -33,7 +33,7 @@ docker_build_user:
         - docker build -t java_app:latest -f Dockerfile.product .
         
     script:
-        - docker run java_app:latest 
+        - docker run -d product_app:latest 
     tags:
         - Docker_Runner    
     rules:
@@ -54,7 +54,7 @@ docker_build_product:
         - docker build -t java_app:latest -f Dockerfile.user .
         
     script:
-        - docker run java_app:latest 
+        - docker run -d user_app:latest 
     tags:
         - Docker_Runner    
     rules:
