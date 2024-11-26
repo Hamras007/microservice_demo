@@ -1,5 +1,4 @@
-FROM openjdk:18
-RUN apt-get update && apt-get install -y maven
+FROM maven:latest
 RUN mvn --version
 RUN mkdir /app
 COPY user-service /app
