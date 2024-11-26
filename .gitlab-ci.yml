@@ -30,7 +30,7 @@ docker_build:
     before_script:
         - pwd
         - ls -l
-        - docker build -t java_app:latest -f Dockerfile.user .
+        - docker build -t java_app:latest -f Dockerfile.product .
         
     script:
         - docker run java_app:latest 
