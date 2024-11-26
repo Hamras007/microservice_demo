@@ -73,8 +73,8 @@ docker_build_product:
         - docker push registry.gitlab.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/product_app:latest
     tags:
         - Kubernetes 
-    #rules:
-    #    - when: manual    
+    rules:
+        - when: manual    
         
 ################################################################################################################
 
@@ -91,8 +91,8 @@ kubernetes_deploy:
       - kubectl apply -f k8s/user_app_deployment.yaml    
   tags:
     - Kubernetes
-  rules:
-      - when: manual  
+  #rules:
+  #    - when: manual  
 
 ################################################################################################################
 
