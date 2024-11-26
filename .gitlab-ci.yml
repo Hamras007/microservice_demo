@@ -31,16 +31,20 @@ variables:
 
 ################################################################################################################
 
-.docker_build_user:
+docker_build_user:
     stage: build
     image: docker:latest
     before_script:
         - docker build -t user_app:latest -f Dockerfile.user .
         
     script:
-        - docker run -d user_app:latest 
+        - echo $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin registry.gitlab.com
+        - docker tag user_app:latest registry.gitlab.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/user_app:latest 
+        - docker push registry.gitlab.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/user_app:latest
     tags:
-        - Kubernetes
+        - Kubernetes 
+    rules:
+        - when: manual
 
 ################################################################################################################
 
@@ -83,7 +87,8 @@ kubernetes_deploy:
       - kubectl get nodes
         
   script:
-      - kubectl apply -f k8s/deployment.yaml    
+      - kubectl apply -f k8s/product_app_deployment.yaml
+      - kubectl apply -f k8s/user_app_deployment.yaml    
   tags:
     - Kubernetes
   rules:
