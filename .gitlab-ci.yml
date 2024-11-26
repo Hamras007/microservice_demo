@@ -33,7 +33,7 @@ docker_build:
         - docker build -t java_app:latest .
         
     script:
-        - docker run java_app:latest ls -R
+        - docker run java_app:latest 
     tags:
         - Docker_Runner    
     rules:
