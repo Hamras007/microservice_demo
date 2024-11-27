@@ -5,7 +5,7 @@ stages:
     - test
 
 services:
-    - docker:dind
+    - docker:dind 
  
 variables:
     DOCKER_DRIVER: overlay2 
