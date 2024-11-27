@@ -16,4 +16,4 @@ spec:
         - name: front-end
           image: registry.gitlab.com/hamrashilar/spring/front_end:latest  
           ports:
-            - containerPort: 8083
+            - containerPort: 8000
