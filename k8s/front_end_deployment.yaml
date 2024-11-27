@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: front-end
-          image: registry.gitlab.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/front_end:latest  
+          image: registry.gitlab.com/hamrashilar/spring/front_end:latest  
           ports:
             - containerPort: 8083
