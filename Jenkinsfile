@@ -4,15 +4,15 @@ pipeline {
     environment {
         DOCKER_DRIVER = 'overlay2'
         DOCKER_TLS_CERTDIR = ''
-        KUBE_VERSION = sh(script: 'curl https://storage.googleapis.com/kubernetes-release/release/stable.txt', returnStdout: true).trim()
-        KUBE_CONFIG = credentials('kube_config') // Assuming you have a stored Jenkins credential
+        KUBE_VERSION = sh(script: 'curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt', returnStdout: true).trim()
+        KUBE_CONFIG = credentials('kube_config') // Replace 'kube_config' with your Jenkins credential ID
     }
 
     stages {
         stage('Package') {
             steps {
                 echo 'Packaging application'
-                // Here you can add any packaging steps, like copying files or dependencies
+                // Add any packaging steps here, such as copying files or dependencies
             }
         }
 
@@ -77,7 +77,11 @@ pipeline {
                     sh 'chmod a+x /usr/local/bin/kubectl'
                     sh 'mkdir -p ~/.kube'
                     sh 'echo "${KUBE_CONFIG}" > ~/.kube/config'
+
+                    // Validate the Kubernetes setup
                     sh 'kubectl get nodes'
+
+                    // Apply Kubernetes manifests
                     sh 'kubectl apply -f k8s/product_app_deployment.yaml'
                     sh 'kubectl apply -f k8s/user_app_deployment.yaml'
                     sh 'kubectl apply -f k8s/front_end_deployment.yaml'
