@@ -7,7 +7,7 @@ spec:
     app: product-app
   ports:
     - protocol: TCP
-      port: 80
+      port: 81
       targetPort: 8082
       nodePort: 30001
   type: NodePort
