@@ -4,7 +4,7 @@ metadata:
   name: product-app-service
 spec:
   selector:
-    app: product-app-service
+    app: product-app
   ports:
     - protocol: TCP
       port: 8084
