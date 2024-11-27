@@ -1,4 +1,17 @@
-FROM nginx:alpine
-COPY frontend/index.html /usr/share/nginx/
-EXPOSE 83
-CMD ["nginx", "-g", "daemon off;"]
+# Use a Python 3 base image
+FROM python:3.9-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy your frontend files (e.g., HTML, CSS, JS) into the container
+COPY . /app
+
+# Expose the port that the Python HTTP server will use
+EXPOSE 8000
+
+# Install any dependencies if required (e.g., if you have a requirements.txt)
+# RUN pip install -r requirements.txt  # Uncomment if you have Python dependencies
+
+# Set the CMD to run Python's HTTP server
+CMD ["python3", "-m", "http.server", "8000", "--bind", "0.0.0.0"]
