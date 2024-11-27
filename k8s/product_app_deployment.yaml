@@ -13,7 +13,7 @@ spec:
         app: product-app
     spec:
       containers:
-        - name: user-app
+        - name: product-app
           image: registry.gitlab.com/hamrashilar/spring/product_app:latest  
           ports:
             - containerPort: 8082
