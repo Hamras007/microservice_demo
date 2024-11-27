@@ -39,8 +39,8 @@ docker_build_user:
         
     script:
         - echo $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin registry.gitlab.com
-        - docker tag user_app:latest registry.gitlab.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/user_app:latest 
-        - docker push registry.gitlab.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/user_app:latest
+        - docker tag user_app:latest registry.gitlab.com/hamrashilar/spring/user_app:latest 
+        - docker push registry.gitlab.com/hamrashilar/spring/user_app:latest
     tags:
         - Kubernetes 
     rules:
@@ -69,8 +69,8 @@ docker_build_product:
         
     script:
         - echo $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin registry.gitlab.com
-        - docker tag product_app:latest registry.gitlab.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/product_app:latest 
-        - docker push registry.gitlab.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/product_app:latest
+        - docker tag product_app:latest registry.gitlab.com/hamrashilar/spring/product_app:latest 
+        - docker push registry.gitlab.com/hamrashilar/spring/product_app:latest
     tags:
         - Kubernetes 
     rules:
@@ -86,8 +86,8 @@ docker_build_front_end:
         
     script:
         - echo $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin registry.gitlab.com
-        - docker tag front_end:latest registry.gitlab.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/front_end:latest 
-        - docker push registry.gitlab.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/front_end:latest
+        - docker tag front_end:latest registry.gitlab.com/hamrashilar/spring/front_end:latest 
+        - docker push registry.gitlab.com/hamrashilar/spring/front_end:latest
     tags:
         - Kubernetes 
     rules:
