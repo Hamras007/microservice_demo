@@ -13,11 +13,7 @@ pipeline {
         
  
     stages {
-        stage('Clone GitLab Repo') {
-            steps {
-                git url: "$GIT_URL", branch: "$GIT_BRANCH"
-            }
-        }
+        
     
         stage('Build User App') {
             agent {
@@ -29,10 +25,10 @@ pipeline {
 
             steps {
                 script {
-                    sh 'sudo docker build -t user_app:latest -f Dockerfile.user .'
+                        sh 'docker build -t user_app:latest -f Dockerfile.user .'
                     withDockerRegistry([credentialsId: 'docker-registry-credentials', url: 'https://registry.gitlab.com']) {
-                        sh 'sudo docker tag user_app:latest registry.gitlab.com/hamrashilar/spring/user_app:latest'
-                        sh 'sudo docker push registry.gitlab.com/hamrashilar/spring/user_app:latest'
+                        sh 'docker tag user_app:latest registry.gitlab.com/hamrashilar/spring/user_app:latest'
+                        sh 'docker push registry.gitlab.com/hamrashilar/spring/user_app:latest'
                     }
                 }
             }
@@ -48,10 +44,10 @@ pipeline {
 
             steps {
                 script {
-                    sh 'sudo docker build -t product_app:latest -f Dockerfile.product .'
+                    sh 'docker build -t product_app:latest -f Dockerfile.product .'
                     withDockerRegistry([credentialsId: 'docker-registry-credentials', url: 'https://registry.gitlab.com']) {
-                        sh 'sudo docker tag product_app:latest registry.gitlab.com/hamrashilar/spring/product_app:latest'
-                        sh 'sudo docker push registry.gitlab.com/hamrashilar/spring/product_app:latest'
+                        sh 'docker tag product_app:latest registry.gitlab.com/hamrashilar/spring/product_app:latest'
+                        sh 'docker push registry.gitlab.com/hamrashilar/spring/product_app:latest'
                     }
                 }
             }
@@ -67,33 +63,39 @@ pipeline {
 
             steps {
                 script {
-                    sh 'sudo docker build -t front_end:latest -f Dockerfile.frontend .'
+                    sh 'docker build -t front_end:latest -f Dockerfile.frontend .'
                     withDockerRegistry([credentialsId: 'docker-registry-credentials', url: 'https://registry.gitlab.com']) {
-                        sh 'sudo docker tag front_end:latest registry.gitlab.com/hamrashilar/spring/front_end:latest'
-                        sh 'sudo docker push registry.gitlab.com/hamrashilar/spring/front_end:latest'
+                        sh 'docker tag front_end:latest registry.gitlab.com/hamrashilar/spring/front_end:latest'
+                        sh 'docker push registry.gitlab.com/hamrashilar/spring/front_end:latest'
                     }
                 }
             }
         }
 
         stage('Deploy to Kubernetes') {
+            agent {
+        docker { 
+            image 'docker:20.10-dind'
+            args '--privileged -v /var/run/docker.sock:/var/run/docker.sock --entrypoint=""'
+        }  
+    }
             steps {
                 script {
-                    sh 'sudo curl -Lo /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kubectl'
-                    sh 'sudo chmod a+x /usr/local/bin/kubectl'
-                    sh 'sudo mkdir -p ~/.kube'
-                    sh 'sudo echo "${KUBE_CONFIG}" > ~/.kube/config'
+                    sh 'curl -Lo /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kubectl'
+                    sh 'chmod a+x /usr/local/bin/kubectl'
+                    sh 'mkdir -p ~/.kube'
+                    sh 'echo "${KUBE_CONFIG}" > ~/.kube/config'
 
                     // Validate the Kubernetes setup
-                    sh 'sudo kubectl get nodes'
+                    sh 'kubectl get nodes'
 
                     // Apply Kubernetes manifests
-                    sh 'sudo kubectl apply -f k8s/product_app_deployment.yaml'
-                    sh 'sudo kubectl apply -f k8s/user_app_deployment.yaml'
-                    sh 'sudo kubectl apply -f k8s/front_end_deployment.yaml'
-                    sh 'sudo kubectl apply -f k8s/product_service.yaml'
-                    sh 'sudo kubectl apply -f k8s/user_service.yaml'
-                    sh 'sudo kubectl apply -f k8s/front_end_service.yaml'
+                    sh 'kubectl apply -f k8s/product_app_deployment.yaml'
+                    sh 'kubectl apply -f k8s/user_app_deployment.yaml'
+                    sh 'kubectl apply -f k8s/front_end_deployment.yaml'
+                    sh 'kubectl apply -f k8s/product_service.yaml'
+                    sh 'kubectl apply -f k8s/user_service.yaml'
+                    sh 'kubectl apply -f k8s/front_end_service.yaml'
                 }
             }
         }
