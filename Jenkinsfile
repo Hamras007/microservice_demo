@@ -80,6 +80,7 @@ pipeline {
     }
             steps {
                 script {
+                    sh 'apk add curl'
                     sh 'curl -Lo /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kubectl'
                     sh 'chmod a+x /usr/local/bin/kubectl'
                     sh 'mkdir -p ~/.kube'
