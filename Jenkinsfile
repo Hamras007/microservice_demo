@@ -87,6 +87,7 @@ pipeline {
                     sh 'mkdir -p ~/.kube'
                     sh 'echo "${KUBE_CONFIG}" > ~/.kube/config'
                     sh 'echo "${KUBE_CONFIG}"'
+                    sh 'cat ~/.kube/config'
                     // Validate the Kubernetes setup
                     sh 'kubectl get nodes'
 
