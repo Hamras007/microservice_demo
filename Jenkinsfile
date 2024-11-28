@@ -9,7 +9,7 @@ pipeline {
     }
 
     stages {
-        stage('Package') {
+        stage('Package') { 
             steps {
                 echo 'Packaging application'
                 // Add any packaging steps here, such as copying files or dependencies
