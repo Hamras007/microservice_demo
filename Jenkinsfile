@@ -63,21 +63,21 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    sh 'echo "123" | sudo -S curl -Lo /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kubectl'
-                    sh 'echo "123" | sudo -S chmod a+x /usr/local/bin/kubectl'
-                    sh 'echo "123" | sudo -S mkdir -p ~/.kube'
-                    sh 'echo "123" | sudo -S echo "${KUBE_CONFIG}" > ~/.kube/config'
+                    sh 'sudo curl -Lo /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kubectl'
+                    sh 'sudo chmod a+x /usr/local/bin/kubectl'
+                    sh 'sudo mkdir -p ~/.kube'
+                    sh 'sudo echo "${KUBE_CONFIG}" > ~/.kube/config'
 
                     // Validate the Kubernetes setup
                     sh 'echo "123" | sudo -S kubectl get nodes'
 
                     // Apply Kubernetes manifests
-                    sh 'echo "123" | sudo -S kubectl apply -f k8s/product_app_deployment.yaml'
-                    sh 'echo "123" | sudo -S kubectl apply -f k8s/user_app_deployment.yaml'
-                    sh 'echo "123" | sudo -S kubectl apply -f k8s/front_end_deployment.yaml'
-                    sh 'echo "123" | sudo -S kubectl apply -f k8s/product_service.yaml'
-                    sh 'echo "123" | sudo -S kubectl apply -f k8s/user_service.yaml'
-                    sh 'echo "123" | sudo -S kubectl apply -f k8s/front_end_service.yaml'
+                    sh 'sudo kubectl apply -f k8s/product_app_deployment.yaml'
+                    sh 'sudo kubectl apply -f k8s/user_app_deployment.yaml'
+                    sh 'sudo kubectl apply -f k8s/front_end_deployment.yaml'
+                    sh 'sudo kubectl apply -f k8s/product_service.yaml'
+                    sh 'sudo kubectl apply -f k8s/user_service.yaml'
+                    sh 'sudo kubectl apply -f k8s/front_end_service.yaml'
                 }
             }
         }
