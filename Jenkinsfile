@@ -19,7 +19,7 @@ pipeline {
         stage('Build User App') {
             agent {
                 docker {
-                    image 'docker:latest'
+                    image 'docker:19.03.12-dind'
                     args '-v /var/run/docker.sock:/var/run/docker.sock'
                 }
             }
@@ -37,7 +37,7 @@ pipeline {
         stage('Build Product App') {
             agent {
                 docker {
-                    image 'docker:latest'
+                    image 'docker:19.03.12-dind'
                     args '-v /var/run/docker.sock:/var/run/docker.sock'
                 }
             }
@@ -55,7 +55,7 @@ pipeline {
         stage('Build Front End') {
             agent {
                 docker {
-                    image 'docker:latest'
+                    image 'docker:19.03.12-dind'
                     args '-v /var/run/docker.sock:/var/run/docker.sock'
                 }
             }
