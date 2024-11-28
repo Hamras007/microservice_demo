@@ -1,7 +1,9 @@
 pipeline {
     agent any
 
-    environment {     
+    environment {
+        GIT_URL = 'https://gitlab.com/hamrashilar/spring.git'
+        GIT_BRANCH = 'Jenkins_integration'   
         DOCKER_TLS_CERTDIR = '' 
         KUBE_VERSION = sh(script: 'curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt', returnStdout: true).trim()
         KUBE_CONFIG = credentials('kube_config') // Replace 'kube_config' with your Jenkins credential ID
@@ -13,7 +15,7 @@ pipeline {
     stages {
         stage('Clone GitLab Repo') {
             steps {
-                git 'https://gitlab.com/hamrashilar/spring.git'
+                git url: "$GIT_URL", branch: "$GIT_BRANCH"
             }
         }
     
