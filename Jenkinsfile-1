@@ -12,11 +12,12 @@ pipeline {
     
         stage('Build User App') {
             agent {
-                docker {
-                    image 'docker:latest'
-                    args '-v /var/run/docker.sock:/var/run/docker.sock'
-                }
-            }
+              docker { 
+               image 'docker:20.10-dind'
+               args '--privileged -v /var/run/docker.sock:/var/run/docker.sock --entrypoint=""'
+        }  
+    }
+
             steps {
                 script {
                     sh 'docker build -t user_app:latest -f Dockerfile.user .'
@@ -30,11 +31,12 @@ pipeline {
 
         stage('Build Product App') {
             agent {
-                docker {
-                    image 'docker:latest'
-                    args '-v /var/run/docker.sock:/var/run/docker.sock'
-                }
-            }
+        docker { 
+            image 'docker:20.10-dind'
+            args '--privileged -v /var/run/docker.sock:/var/run/docker.sock --entrypoint=""'
+        }  
+    }
+
             steps {
                 script {
                     sh 'docker build -t product_app:latest -f Dockerfile.product .'
@@ -48,11 +50,12 @@ pipeline {
 
         stage('Build Front End') {
             agent {
-                docker {
-                    image 'docker:latest'
-                    args '-v /var/run/docker.sock:/var/run/docker.sock'
-                }
-            }
+        docker { 
+            image 'docker:20.10-dind'
+            args '--privileged -v /var/run/docker.sock:/var/run/docker.sock --entrypoint=""'
+        }  
+    }
+
             steps {
                 script {
                     sh 'docker build -t front_end:latest -f Dockerfile.frontend .'
