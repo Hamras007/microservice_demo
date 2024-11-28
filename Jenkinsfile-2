@@ -1,19 +1,23 @@
 pipeline {
-    agent {
-        docker { 
-            image 'docker:20.10-dind'
-            args '--privileged -v /var/run/docker.sock:/var/run/docker.sock --entrypoint=""'
-        }  
-    }
+    agent any
 
-
-    environment {     
-        DOCKER_TLS_CERTDIR = '' 
+    environment {
+        GIT_URL = 'https://gitlab.com/hamrashilar/spring.git'
+        GIT_BRANCH = 'Jenkins_integration'   
+         
         KUBE_VERSION = sh(script: 'curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt', returnStdout: true).trim()
         KUBE_CONFIG = credentials('kube_config') // Replace 'kube_config' with your Jenkins credential ID
     }
+
+    
+        
  
     stages {
+        stage('Clone GitLab Repo') {
+            steps {
+                git url: "$GIT_URL", branch: "$GIT_BRANCH"
+            }
+        }
     
         stage('Build User App') {
             
@@ -30,6 +34,7 @@ pipeline {
 
         stage('Build Product App') {
             
+
             steps {
                 script {
                     sh 'docker build -t product_app:latest -f Dockerfile.product .'
@@ -43,6 +48,7 @@ pipeline {
 
         stage('Build Front End') {
             
+
             steps {
                 script {
                     sh 'docker build -t front_end:latest -f Dockerfile.frontend .'
@@ -77,3 +83,4 @@ pipeline {
         }
     }
 }
+
