@@ -9,13 +9,7 @@ pipeline {
     }
  
     stages {
-    #    stage('Package') { 
-    #        steps {
-    #            echo 'Packaging application'
-    #            // Add any packaging steps here, such as copying files or dependencies
-    #        }
-    #    }
-
+    
         stage('Build User App') {
             agent {
                 docker {
