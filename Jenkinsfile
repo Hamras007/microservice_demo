@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent none
 
     environment {  
         DOCKER_DRIVER = 'overlay2'   
@@ -9,12 +9,12 @@ pipeline {
     }
  
     stages {
-        stage('Package') { 
-            steps {
-                echo 'Packaging application'
-                // Add any packaging steps here, such as copying files or dependencies
-            }
-        }
+    #    stage('Package') { 
+    #        steps {
+    #            echo 'Packaging application'
+    #            // Add any packaging steps here, such as copying files or dependencies
+    #        }
+    #    }
 
         stage('Build User App') {
             agent {
