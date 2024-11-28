@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                     sh 'docker build -t user_app:latest -f Dockerfile.user .'
-                    withDockerRegistry([credentialsId: 'docker-registry-credentials', url: 'https://registry.gitlab.com']) {
+                    withDockerRegistry([credentialsId: 'Gitlab_Reg_Access', url: 'https://registry.gitlab.com']) {
                         sh 'docker tag user_app:latest registry.gitlab.com/hamrashilar/spring/user_app:latest'
                         sh 'docker push registry.gitlab.com/hamrashilar/spring/user_app:latest'
                     }
@@ -38,7 +38,7 @@ pipeline {
             steps {
                 script {
                     sh 'docker build -t product_app:latest -f Dockerfile.product .'
-                    withDockerRegistry([credentialsId: 'docker-registry-credentials', url: 'https://registry.gitlab.com']) {
+                    withDockerRegistry([credentialsId: 'Gitlab_Reg_Access', url: 'https://registry.gitlab.com']) {
                         sh 'docker tag product_app:latest registry.gitlab.com/hamrashilar/spring/product_app:latest'
                         sh 'docker push registry.gitlab.com/hamrashilar/spring/product_app:latest'
                     }
@@ -52,7 +52,7 @@ pipeline {
             steps {
                 script {
                     sh 'docker build -t front_end:latest -f Dockerfile.frontend .'
-                    withDockerRegistry([credentialsId: 'docker-registry-credentials', url: 'https://registry.gitlab.com']) {
+                    withDockerRegistry([credentialsId: 'Gitlab_Reg_Access', url: 'https://registry.gitlab.com']) {
                         sh 'docker tag front_end:latest registry.gitlab.com/hamrashilar/spring/front_end:latest'
                         sh 'docker push registry.gitlab.com/hamrashilar/spring/front_end:latest'
                     }
