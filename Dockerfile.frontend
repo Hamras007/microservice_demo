@@ -7,7 +7,7 @@ WORKDIR /app
 # Copy your frontend files (e.g., HTML, CSS, JS) into the container
 COPY frontend/index.html /app
 
-# Expose the port that the Python HTTP server will use
+# Expose the port that the Python HTTP server will use 
 EXPOSE 8000
 
 # Install any dependencies if required (e.g., if you have a requirements.txt)
