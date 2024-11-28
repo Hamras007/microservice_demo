@@ -2,7 +2,7 @@ pipeline {
     agent none
 
     environment {  
-        DOCKER_DRIVER = 'overlay2'  
+        DOCKER_DRIVER = 'overlay2'   
         DOCKER_TLS_CERTDIR = '' 
         KUBE_VERSION = sh(script: 'curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt', returnStdout: true).trim()
         KUBE_CONFIG = credentials('kube_config') // Replace 'kube_config' with your Jenkins credential ID
