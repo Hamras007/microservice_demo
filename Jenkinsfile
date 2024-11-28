@@ -65,11 +65,13 @@ pipeline {
                 script {
                     sh 'sudo curl -Lo /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kubectl'
                     sh 'sudo chmod a+x /usr/local/bin/kubectl'
-                    sh 'sudo mkdir -p ~/.kube'
-                    sh 'sudo echo "${KUBE_CONFIG}" > ~/.kube/config'
+                    sh 'sudo mkdir -p /var/lib/jenkins/.kube'
+                    sh 'sudo touch /var/lib/jenkins/.kube/config
+                    sh 'sudo chown -R jenkins:jenkins /var/lib/jenkins/.kube'
+                    sh 'sudo echo "${KUBE_CONFIG}" > /var/lib/jenkins/.kube/config'
 
                     // Validate the Kubernetes setup
-                    sh 'echo "123" | sudo -S kubectl get nodes'
+                    sh 'sudo kubectl get nodes'
 
                     // Apply Kubernetes manifests
                     sh 'sudo kubectl apply -f k8s/product_app_deployment.yaml'
