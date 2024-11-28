@@ -86,7 +86,7 @@ pipeline {
                     sh 'chmod a+x /usr/local/bin/kubectl'
                     sh 'mkdir -p ~/.kube'
                     sh 'echo "${KUBE_CONFIG}" > ~/.kube/config'
-
+                    sh 'echo "${KUBE_CONFIG}"'
                     // Validate the Kubernetes setup
                     sh 'kubectl get nodes'
 
