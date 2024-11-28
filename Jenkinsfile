@@ -1,6 +1,6 @@
 pipeline {
     agent any
- 
+  
     environment {
         GIT_URL = 'https://gitlab.com/hamrashilar/spring.git'
         GIT_BRANCH = 'Jenkins_integration'   
