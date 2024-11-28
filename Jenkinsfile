@@ -1,7 +1,7 @@
 pipeline {
     agent any 
 
-    environment {
+    environment {  
         DOCKER_DRIVER = 'overlay2'
         DOCKER_TLS_CERTDIR = '' 
         KUBE_VERSION = sh(script: 'curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt', returnStdout: true).trim()
