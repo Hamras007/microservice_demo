@@ -85,8 +85,7 @@ pipeline {
                     sh 'curl -Lo /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kubectl'
                     sh 'chmod a+x /usr/local/bin/kubectl'
                     sh 'mkdir -p ~/.kube'
-                    sh 'echo "${KUBE_CONFIG}" > ~/.kube/config'
-                    sh 'echo "${KUBE_CONFIG}"'
+                    sh 'cp "$KUBE_CONFIG" ~/.kube/config'
                     sh 'cat ~/.kube/config'
                     // Validate the Kubernetes setup
                     sh 'kubectl get nodes'
