@@ -6,7 +6,7 @@ pipeline {
         GIT_BRANCH = 'Jenkins_integration'   
         DOCKER_TLS_CERTDIR = '' 
         KUBE_VERSION = sh(script: 'curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt', returnStdout: true).trim()
-        KUBE_CONFIG = credentials('kube_config') // Replace 'kube_config' with your Jenkins credential ID
+        
     }
 
     
@@ -79,13 +79,14 @@ pipeline {
             args '--user root -e KUBE_CONFIG'
         }  
     }
-            steps {
+        steps {
+            withCredentials([file(credentialsId: 'kube_config_file', variable: 'KUBE_CONFIG')]){
                 script {
                     sh 'apk add curl'
                     sh 'curl -Lo /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kubectl'
                     sh 'chmod a+x /usr/local/bin/kubectl'
                     sh 'mkdir -p ~/.kube'
-                    sh 'echo "${KUBE_CONFIG}" > ~/.kube/config'
+                    sh 'cp "${KUBE_CONFIG}" > ~/.kube/config'
                     sh 'cat ~/.kube/config'
                     // Validate the Kubernetes setup
                     sh 'kubectl get nodes'
@@ -97,6 +98,7 @@ pipeline {
                     sh 'kubectl apply -f k8s/product_service.yaml'
                     sh 'kubectl apply -f k8s/user_service.yaml'
                     sh 'kubectl apply -f k8s/front_end_service.yaml'
+                }
                 }
             }
         }
