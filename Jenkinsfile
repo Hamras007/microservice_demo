@@ -30,7 +30,7 @@ pipeline {
             agent {
         docker { 
             image 'alpine:latest'
-            args '--user root 
+            args '--user root' 
         }
         }
         steps {
