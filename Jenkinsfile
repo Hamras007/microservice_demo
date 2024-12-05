@@ -39,9 +39,9 @@ pipeline {
                 sh 'aws s3 ls'
                 sh 'aws s3 ls s3://testing-s3-bucket-007/'
                 sh 'pwd'
-                sh 's3 cp s3://testing-s3-bucket-007/control_plane_ip .
-                sh 's3 cp s3://testing-s3-bucket-007/worker_node_ip .
-                sh 's3 cp s3://testing-s3-bucket-007/admin.conf .
+                sh 's3 cp s3://testing-s3-bucket-007/control_plane_ip .'
+                sh 's3 cp s3://testing-s3-bucket-007/worker_node_ip .'
+                sh 's3 cp s3://testing-s3-bucket-007/admin.conf .'
                 sh 'ls'
                 sh 'echo "$(worker_node_ip)"'
                 sh 'sed -i "s|\(http://\)[^:]*\(:3000\)|\1$(cat worker_node_ip)\2|" frontend/index.html'
