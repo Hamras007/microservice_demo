@@ -14,13 +14,14 @@ pipeline {
  
     stages {
         stage('Activate dockersock') {
-            script{
+            steps {
+            script {
                 sh 'chmod 777 /var/run/docker.sock'
                 sh ' ls -l /var/run/docker.sock'
             }
 
         }
-        
+        }
     
         stage('Build User App') {
             agent {
