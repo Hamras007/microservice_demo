@@ -44,9 +44,11 @@ pipeline {
                 sh 's3 cp s3://testing-s3-bucket-007/admin.conf .'
                 sh 'ls'
                 sh 'echo "$(worker_node_ip)"'
-                sh 'sed -i "s|\(http://\)[^:]*\(:3000\)|\1$(cat worker_node_ip)\2|" frontend/index.html'
-                sh 'sed -i "s|\(http://\)[^:]*\(:3000\)|\1$(cat worker_node_ip)\2|" product-service/src/main/java/com.example.product/CorsConfig.java'
-                sh 'sed -i "s|\(http://\)[^:]*\(:3000\)|\1$(cat worker_node_ip)\2|" user-service/src/main/java/com.example.user/CorsConfig.java'
+                sh 'sed -i "s|\\(http://\\)[^:]*\\(:3000\\)|\\1$(cat worker_node_ip)\\2|" frontend/index.html'
+                sh 'sed -i "s|\\(http://\\)[^:]*\\(:3000\\)|\\1$(cat worker_node_ip)\\2|" product-service/src/main/java/com.example.product/CorsConfig.java'
+                sh 'sed -i "s|\\(http://\\)[^:]*\\(:3000\\)|\\1$(cat worker_node_ip)\\2|" user-service/src/main/java/com.example.user/CorsConfig.java'
+
+                
                 
 
 
