@@ -69,6 +69,14 @@ pipeline {
 
             steps {
                 script {
+                        sh 'cat $(worker_node_ip)'
+                        sh 'sed -i "s|\\(http://\\)[^:]*\\(:3000\\)|\\1$(cat worker_node_ip)\\2|" frontend/index.html'
+                        sh 'cat frontend/index.html'
+                        sh 'sed -i "s|\\(http://\\)[^:]*\\(:3000\\)|\\1$(cat worker_node_ip)\\2|" product-service/src/main/java/com.example.product/CorsConfig.java'
+                        sh 'cat product-service/src/main/java/com.example.product/CorsConfig.java'
+                        sh 'sed -i "s|\\(http://\\)[^:]*\\(:3000\\)|\\1$(cat worker_node_ip)\\2|" user-service/src/main/java/com.example.user/CorsConfig.java'
+                        sh 'cat user-service/src/main/java/com.example.user/CorsConfig.java'
+
                         sh 'docker build -t user_app:latest -f Dockerfile.user .'
                     withDockerRegistry([credentialsId: 'Gitlab_Reg_Access', url: 'https://registry.gitlab.com']) {
                         sh 'docker tag user_app:latest registry.gitlab.com/hamrashilar/spring/user_app:latest'
@@ -88,6 +96,14 @@ pipeline {
 
             steps {
                 script {
+                    sh 'cat $(worker_node_ip)'
+                    sh 'sed -i "s|\\(http://\\)[^:]*\\(:3000\\)|\\1$(cat worker_node_ip)\\2|" frontend/index.html'
+                    sh 'cat frontend/index.html'
+                    sh 'sed -i "s|\\(http://\\)[^:]*\\(:3000\\)|\\1$(cat worker_node_ip)\\2|" product-service/src/main/java/com.example.product/CorsConfig.java'
+                    sh 'cat product-service/src/main/java/com.example.product/CorsConfig.java'
+                    sh 'sed -i "s|\\(http://\\)[^:]*\\(:3000\\)|\\1$(cat worker_node_ip)\\2|" user-service/src/main/java/com.example.user/CorsConfig.java'
+                    sh 'cat user-service/src/main/java/com.example.user/CorsConfig.java'
+
                     sh 'docker build -t product_app:latest -f Dockerfile.product .'
                     withDockerRegistry([credentialsId: 'Gitlab_Reg_Access', url: 'https://registry.gitlab.com']) {
                         sh 'docker tag product_app:latest registry.gitlab.com/hamrashilar/spring/product_app:latest'
@@ -107,6 +123,14 @@ pipeline {
 
             steps {
                 script {
+                    sh 'cat $(worker_node_ip)'
+                    sh 'sed -i "s|\\(http://\\)[^:]*\\(:3000\\)|\\1$(cat worker_node_ip)\\2|" frontend/index.html'
+                    sh 'cat frontend/index.html'
+                    sh 'sed -i "s|\\(http://\\)[^:]*\\(:3000\\)|\\1$(cat worker_node_ip)\\2|" product-service/src/main/java/com.example.product/CorsConfig.java'
+                    sh 'cat product-service/src/main/java/com.example.product/CorsConfig.java'
+                    sh 'sed -i "s|\\(http://\\)[^:]*\\(:3000\\)|\\1$(cat worker_node_ip)\\2|" user-service/src/main/java/com.example.user/CorsConfig.java'
+                    sh 'cat user-service/src/main/java/com.example.user/CorsConfig.java'
+
                     sh 'docker build -t front_end:latest -f Dockerfile.frontend .'
                     withDockerRegistry([credentialsId: 'Gitlab_Reg_Access', url: 'https://registry.gitlab.com']) {
                         sh 'docker tag front_end:latest registry.gitlab.com/hamrashilar/spring/front_end:latest'
@@ -126,11 +150,18 @@ pipeline {
         steps {
            
               script {
+                    sh 'cat $(worker_node_ip)'
+                    sh 'sed -i "s|\\(http://\\)[^:]*\\(:3000\\)|\\1$(cat worker_node_ip)\\2|" frontend/index.html'
+                    sh 'cat frontend/index.html'
+                    sh 'sed -i "s|\\(http://\\)[^:]*\\(:3000\\)|\\1$(cat worker_node_ip)\\2|" product-service/src/main/java/com.example.product/CorsConfig.java'
+                    sh 'cat product-service/src/main/java/com.example.product/CorsConfig.java'
+                    sh 'sed -i "s|\\(http://\\)[^:]*\\(:3000\\)|\\1$(cat worker_node_ip)\\2|" user-service/src/main/java/com.example.user/CorsConfig.java'
+                    sh 'cat user-service/src/main/java/com.example.user/CorsConfig.java'
+
                     sh 'apk add curl'
                     sh 'curl -Lo /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kubectl'
                     sh 'chmod a+x /usr/local/bin/kubectl'
                     sh 'mkdir -p ~/.kube'
-                    sh 'echo "192.168.94.17 kubemaster" > /etc/hosts'
                     sh 'cp admin.conf ~/.kube/config'
                     sh 'cat ~/.kube/config'
                     // Validate the Kubernetes setup
