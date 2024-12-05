@@ -44,6 +44,9 @@ pipeline {
                 sh 's3 cp s3://testing-s3-bucket-007/admin.conf .
                 sh 'ls'
                 sh 'echo "$(worker_node_ip)"'
+                sh 'sed -i "s|\(http://\)[^:]*\(:3000\)|\1$(cat worker_node_ip)\2|" frontend/index.html'
+                sh 'sed -i "s|\(http://\)[^:]*\(:3000\)|\1$(cat worker_node_ip)\2|" product-service/src/main/java/com.example.product/CorsConfig.java'
+                sh 'sed -i "s|\(http://\)[^:]*\(:3000\)|\1$(cat worker_node_ip)\2|" user-service/src/main/java/com.example.user/CorsConfig.java'
                 
 
 
@@ -116,14 +119,14 @@ pipeline {
         }  
     }
         steps {
-            withCredentials([file(credentialsId: 'kube_config_file', variable: 'KUBE_CONFIG')]){
-                script {
+           
+              script {
                     sh 'apk add curl'
                     sh 'curl -Lo /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kubectl'
                     sh 'chmod a+x /usr/local/bin/kubectl'
                     sh 'mkdir -p ~/.kube'
                     sh 'echo "192.168.94.17 kubemaster" > /etc/hosts'
-                    sh 'cp "${KUBE_CONFIG}" ~/.kube/config'
+                    sh 'cp admin.conf ~/.kube/config'
                     sh 'cat ~/.kube/config'
                     // Validate the Kubernetes setup
                     sh 'kubectl get nodes'
@@ -136,7 +139,7 @@ pipeline {
                     sh 'kubectl apply -f k8s/user_service.yaml'
                     sh 'kubectl apply -f k8s/front_end_service.yaml'
                 }
-                }
+                
             }
         }
     }
