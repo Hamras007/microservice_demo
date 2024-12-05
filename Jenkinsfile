@@ -6,8 +6,11 @@ pipeline {
         GIT_BRANCH = 'Jenkins_integration'   
         DOCKER_TLS_CERTDIR = '' 
         KUBE_VERSION = sh(script: 'curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt', returnStdout: true).trim()
-        
-    }
+        AWS_ACCESS_KEY_ID     = credentials('aws_access_key_id')
+        AWS_SECRET_ACCESS_KEY = credentials('aws_secret_access_key')
+        AWS_DEFAULT_REGION    = 'ap-south-1'
+
+   }
 
     
         
@@ -22,7 +25,32 @@ pipeline {
 
         }
         }
-    
+
+        stage('Update ips ') {
+            agent {
+        docker { 
+            image 'alpine:latest'
+            args '--user root 
+        }
+        }
+        steps {
+            script {
+                sh 'apk add aws-cli'
+                sh 'aws s3 ls'
+                sh 'aws s3 ls s3://testing-s3-bucket-007/'
+                sh 'pwd'
+                sh 's3 cp s3://testing-s3-bucket-007/control_plane_ip .
+                sh 's3 cp s3://testing-s3-bucket-007/worker_node_ip .
+                sh 's3 cp s3://testing-s3-bucket-007/admin.conf .
+                sh 'ls'
+                sh 'echo "$(worker_node_ip)"'
+                
+
+
+            }
+        }
+
+        }
         stage('Build User App') {
             agent {
               docker { 
