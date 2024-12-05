@@ -16,8 +16,8 @@ pipeline {
         stage('Activate dockersock') {
             steps {
             script {
-                sh 'chmod 777 /var/run/docker.sock'
-                sh ' ls -l /var/run/docker.sock'
+                sh ' sudo chmod 777 /var/run/docker.sock'
+                sh ' sudo ls -l /var/run/docker.sock'
             }
 
         }
