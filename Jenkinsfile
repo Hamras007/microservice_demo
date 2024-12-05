@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent any 
   
     environment { 
         GIT_URL = 'https://gitlab.com/hamrashilar/spring.git'
