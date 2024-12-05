@@ -45,7 +45,7 @@
   <script>
     // Fetch and display users
     document.getElementById('fetch-users').addEventListener('click', () => {
-      fetch('http://192.168.94.19:30002/users') // User Service URL
+      fetch('http://:30002/users') // User Service URL
         .then(response => response.text())
         .then(data => {
           document.getElementById('response').innerText = `Users: ${data}`;
@@ -57,7 +57,7 @@
 
     // Fetch and display products
     document.getElementById('fetch-products').addEventListener('click', () => {
-      fetch('http://192.168.94.19:30001/products') // Product Service URL
+      fetch('http://:30001/products') // Product Service URL
         .then(response => response.text())
         .then(data => {
           document.getElementById('response').innerText = `Products: ${data}`;
