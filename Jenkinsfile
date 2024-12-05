@@ -13,7 +13,7 @@ pipeline {
         
  
     stages {
-        stage{
+        stage('Activate dockersock') {
             script{
                 sh 'chmod 777 /var/run/docker.sock'
                 sh ' ls -l /var/run/docker.sock'
