@@ -4,7 +4,7 @@ pipeline {
     environment {     
         GIT_URL = 'https://gitlab.com/hamrashilar/spring.git' 
         GIT_BRANCH = 'Jenkins_integration'    
-        DOCKER_TLS_CERTDIR = '' 
+        DOCKER_TLS_CERTDIR = ''  
         KUBE_VERSION = sh(script: 'curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt', returnStdout: true).trim()
         AWS_ACCESS_KEY_ID     = credentials('aws_access_key_id')
         AWS_SECRET_ACCESS_KEY = credentials('aws_secret_access_key')
