@@ -46,8 +46,10 @@ pipeline {
                 sh 'aws s3 cp s3://testing-s3-bucket-007/admin.conf .'
                 sh 'ls'
                 sh 'cat $(worker_node_ip)'
+
                 sh 'sed -i "s|\\(http://\\)[^:]*\\(:8\\)|\\1$(cat lb_dns)\\2|" frontend/index.html'
                 sh 'cat frontend/index.html'
+
                 sh 'sed -i "s|http://[^\"]*|http://$(cat lb_dns)|" product-service/src/main/java/com.example.product/CorsConfig.java'
                 sh 'cat product-service/src/main/java/com.example.product/CorsConfig.java'
                 sh 'sed -i "s|http://[^\"]*|http://$(cat lb_dns)|" user-service/src/main/java/com.example.user/CorsConfig.java'
@@ -101,7 +103,8 @@ pipeline {
                 script {
                     sh 'cat $(worker_node_ip)'
                     sh 'sed -i "s|\\(http://\\)[^:]*\\(:8\\)|\\1$(cat lb_dns)\\2|" frontend/index.html'
-                    sh 'cat frontend/index.html'
+                    sh 'cat frontend/index.html' 
+
                     sh 'sed -i "s|http://[^\"]*|http://$(cat lb_dns)|" product-service/src/main/java/com.example.product/CorsConfig.java'
                     sh 'cat product-service/src/main/java/com.example.product/CorsConfig.java'
                     sh 'sed -i "s|http://[^\"]*|http://$(cat lb_dns)|" user-service/src/main/java/com.example.user/CorsConfig.java'
@@ -128,7 +131,8 @@ pipeline {
                 script {
                     sh 'cat $(worker_node_ip)'
                     sh 'sed -i "s|\\(http://\\)[^:]*\\(:8\\)|\\1$(cat lb_dns)\\2|" frontend/index.html'
-                    sh 'cat frontend/index.html'
+                    sh 'cat frontend/index.html' 
+
                     sh 'sed -i "s|http://[^\"]*|http://$(cat lb_dns)|" product-service/src/main/java/com.example.product/CorsConfig.java'
                     sh 'cat product-service/src/main/java/com.example.product/CorsConfig.java'
                     sh 'sed -i "s|http://[^\"]*|http://$(cat lb_dns)|" user-service/src/main/java/com.example.user/CorsConfig.java'
@@ -155,7 +159,8 @@ pipeline {
               script {
                     sh 'cat $(worker_node_ip)'
                     sh 'sed -i "s|\\(http://\\)[^:]*\\(:8\\)|\\1$(cat lb_dns)\\2|" frontend/index.html'
-                    sh 'cat frontend/index.html'
+                    sh 'cat frontend/index.html' 
+                    
                     sh 'sed -i "s|http://[^\"]*|http://$(cat lb_dns)|" product-service/src/main/java/com.example.product/CorsConfig.java'
                     sh 'cat product-service/src/main/java/com.example.product/CorsConfig.java'
                     sh 'sed -i "s|http://[^\"]*|http://$(cat lb_dns)|" user-service/src/main/java/com.example.user/CorsConfig.java'
