@@ -50,9 +50,9 @@ pipeline {
                 sh 'sed -i "s|\\(http://\\)[^:]*\\(:8\\)|\\1$(cat lb_dns)\\2|" frontend/index.html'
                 sh 'cat frontend/index.html'
 
-                sh 'sed -i "s|http://[^\"]*|http://$(cat lb_dns)|" product-service/src/main/java/com.example.product/CorsConfig.java'
+                sh 'sed -i "s|\\(http://\\)[^\"]*|\\1$(cat lb_dns)|" product-service/src/main/java/com.example.product/CorsConfig.java'
                 sh 'cat product-service/src/main/java/com.example.product/CorsConfig.java'
-                sh 'sed -i "s|http://[^\"]*|http://$(cat lb_dns)|" user-service/src/main/java/com.example.user/CorsConfig.java'
+                sh 'sed -i "s|\\(http://\\)[^\"]*|\\1$(cat lb_dns)|" user-service/src/main/java/com.example.user/CorsConfig.java'
                 sh 'cat user-service/src/main/java/com.example.user/CorsConfig.java'
 
                 
@@ -77,9 +77,9 @@ pipeline {
                 sh 'sed -i "s|\\(http://\\)[^:]*\\(:8\\)|\\1$(cat lb_dns)\\2|" frontend/index.html'
                 sh 'cat frontend/index.html'
 
-                sh 'sed -i "s|http://[^\"]*|http://$(cat lb_dns)|" product-service/src/main/java/com.example.product/CorsConfig.java'
+                sh 'sed -i "s|\\(http://\\)[^\"]*|\\1$(cat lb_dns)|" product-service/src/main/java/com.example.product/CorsConfig.java'
                 sh 'cat product-service/src/main/java/com.example.product/CorsConfig.java'
-                sh 'sed -i "s|http://[^\"]*|http://$(cat lb_dns)|" user-service/src/main/java/com.example.user/CorsConfig.java'
+                sh 'sed -i "s|\\(http://\\)[^\"]*|\\1$(cat lb_dns)|" user-service/src/main/java/com.example.user/CorsConfig.java'
                 sh 'cat user-service/src/main/java/com.example.user/CorsConfig.java'
 
                 sh 'docker build -t user_app:latest -f Dockerfile.user .'
@@ -105,9 +105,9 @@ pipeline {
                     sh 'sed -i "s|\\(http://\\)[^:]*\\(:8\\)|\\1$(cat lb_dns)\\2|" frontend/index.html'
                     sh 'cat frontend/index.html' 
 
-                    sh 'sed -i "s|http://[^\"]*|http://$(cat lb_dns)|" product-service/src/main/java/com.example.product/CorsConfig.java'
+                    sh 'sed -i "s|\\(http://\\)[^\"]*|\\1$(cat lb_dns)|" product-service/src/main/java/com.example.product/CorsConfig.java'
                     sh 'cat product-service/src/main/java/com.example.product/CorsConfig.java'
-                    sh 'sed -i "s|http://[^\"]*|http://$(cat lb_dns)|" user-service/src/main/java/com.example.user/CorsConfig.java'
+                    sh 'sed -i "s|\\(http://\\)[^\"]*|\\1$(cat lb_dns)|" user-service/src/main/java/com.example.user/CorsConfig.java'
                     sh 'cat user-service/src/main/java/com.example.user/CorsConfig.java'
 
                     sh 'docker build -t product_app:latest -f Dockerfile.product .'
@@ -133,9 +133,9 @@ pipeline {
                     sh 'sed -i "s|\\(http://\\)[^:]*\\(:8\\)|\\1$(cat lb_dns)\\2|" frontend/index.html'
                     sh 'cat frontend/index.html' 
 
-                    sh 'sed -i "s|http://[^\"]*|http://$(cat lb_dns)|" product-service/src/main/java/com.example.product/CorsConfig.java'
+                    sh 'sed -i "s|\\(http://\\)[^\"]*|\\1$(cat lb_dns)|" product-service/src/main/java/com.example.product/CorsConfig.java'
                     sh 'cat product-service/src/main/java/com.example.product/CorsConfig.java'
-                    sh 'sed -i "s|http://[^\"]*|http://$(cat lb_dns)|" user-service/src/main/java/com.example.user/CorsConfig.java'
+                    sh 'sed -i "s|\\(http://\\)[^\"]*|\\1$(cat lb_dns)|" user-service/src/main/java/com.example.user/CorsConfig.java'
                     sh 'cat user-service/src/main/java/com.example.user/CorsConfig.java'
 
                     sh 'docker build -t front_end:latest -f Dockerfile.frontend .'
@@ -161,9 +161,9 @@ pipeline {
                     sh 'sed -i "s|\\(http://\\)[^:]*\\(:8\\)|\\1$(cat lb_dns)\\2|" frontend/index.html'
                     sh 'cat frontend/index.html' 
                     
-                    sh 'sed -i "s|http://[^\"]*|http://$(cat lb_dns)|" product-service/src/main/java/com.example.product/CorsConfig.java'
+                    sh 'sed -i "s|\\(http://\\)[^\"]*|\\1$(cat lb_dns)|" product-service/src/main/java/com.example.product/CorsConfig.java'
                     sh 'cat product-service/src/main/java/com.example.product/CorsConfig.java'
-                    sh 'sed -i "s|http://[^\"]*|http://$(cat lb_dns)|" user-service/src/main/java/com.example.user/CorsConfig.java'
+                    sh 'sed -i "s|\\(http://\\)[^\"]*|\\1$(cat lb_dns)|" user-service/src/main/java/com.example.user/CorsConfig.java'
                     sh 'cat user-service/src/main/java/com.example.user/CorsConfig.java'
 
                     sh 'apk add curl'
