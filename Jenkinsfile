@@ -2,7 +2,7 @@ pipeline {
     agent any 
   
     environment {             
-        GIT_URL = 'https://gitlab.com/hamrashilar/spring.git' 
+        GIT_URL = 'https://gitlab.com/hamrashilar/spring.git'  
         GIT_BRANCH = 'Jenkins_integration'    
         DOCKER_TLS_CERTDIR = ''  
         KUBE_VERSION = sh(script: 'curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt', returnStdout: true).trim()
