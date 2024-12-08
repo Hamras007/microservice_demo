@@ -2,9 +2,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: product-app-service
-  annotations:
-    service.beta.kubernetes.io/aws-load-balancer-type: "alb"
-    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "HTTP"
 spec:
   selector:
     app: product-app
@@ -12,4 +9,5 @@ spec:
     - protocol: TCP
       port: 81
       targetPort: 8082
-  type: LoadBalancer
+      nodePort: 30001
+  type: NodePort
