@@ -10,4 +10,4 @@ spec:
       port: 82
       targetPort: 8081
       nodePort: 30002
-  type: nodePort
+  type: NodePort
