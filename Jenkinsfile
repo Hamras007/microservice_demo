@@ -50,9 +50,9 @@ pipeline {
                 sh 'sed -i "s|\\(http://\\)[^:]*\\(:8\\)|\\1$(cat lb_dns)\\2|" frontend/index.html'
                 sh 'cat frontend/index.html'
 
-                sh 'sed -i "s|\\(http://\\)[^\"]*|\\1$(cat lb_dns)|" product-service/src/main/java/com.example.product/CorsConfig.java'
+                //sh 'sed -i "s|\\(http://\\)[^\"]*|\\1$(cat lb_dns)|" product-service/src/main/java/com.example.product/CorsConfig.java'
                 sh 'cat product-service/src/main/java/com.example.product/CorsConfig.java'
-                sh 'sed -i "s|\\(http://\\)[^\"]*|\\1$(cat lb_dns)|" user-service/src/main/java/com.example.user/CorsConfig.java'
+                //sh 'sed -i "s|\\(http://\\)[^\"]*|\\1$(cat lb_dns)|" user-service/src/main/java/com.example.user/CorsConfig.java'
                 sh 'cat user-service/src/main/java/com.example.user/CorsConfig.java'
 
                 
@@ -74,12 +74,12 @@ pipeline {
             steps {
                 script {
                 sh 'cat $(worker_node_ip)'
-                sh 'sed -i "s|\\(http://\\)[^:]*\\(:8\\)|\\1$(cat lb_dns)\\2|" frontend/index.html'
+               
                 sh 'cat frontend/index.html'
 
-                sh 'sed -i "s|\\(http://\\)[^\"]*|\\1$(cat lb_dns)|" product-service/src/main/java/com.example.product/CorsConfig.java'
+                
                 sh 'cat product-service/src/main/java/com.example.product/CorsConfig.java'
-                sh 'sed -i "s|\\(http://\\)[^\"]*|\\1$(cat lb_dns)|" user-service/src/main/java/com.example.user/CorsConfig.java'
+                
                 sh 'cat user-service/src/main/java/com.example.user/CorsConfig.java'
 
                 sh 'docker build -t user_app:latest -f Dockerfile.user .'
@@ -102,18 +102,18 @@ pipeline {
             steps {
                 script {
                     sh 'cat $(worker_node_ip)'
-                    sh 'sed -i "s|\\(http://\\)[^:]*\\(:8\\)|\\1$(cat lb_dns)\\2|" frontend/index.html'
+                    
                     sh 'cat frontend/index.html' 
 
-                    sh 'sed -i "s|\\(http://\\)[^\"]*|\\1$(cat lb_dns)|" product-service/src/main/java/com.example.product/CorsConfig.java'
+                   
                     sh 'cat product-service/src/main/java/com.example.product/CorsConfig.java'
-                    sh 'sed -i "s|\\(http://\\)[^\"]*|\\1$(cat lb_dns)|" user-service/src/main/java/com.example.user/CorsConfig.java'
+                    
                     sh 'cat user-service/src/main/java/com.example.user/CorsConfig.java'
 
                     sh 'docker build -t product_app:latest -f Dockerfile.product .'
                     withDockerRegistry([credentialsId: 'Gitlab_Reg_Access', url: 'https://registry.gitlab.com']) {
-                        sh 'docker tag product_app:latest registry.gitlab.com/hamrashilar/spring/product_app:latest'
-                        sh 'docker push registry.gitlab.com/hamrashilar/spring/product_app:latest'
+                    sh 'docker tag product_app:latest registry.gitlab.com/hamrashilar/spring/product_app:latest'
+                    sh 'docker push registry.gitlab.com/hamrashilar/spring/product_app:latest'
                     }
                 }
             }
@@ -129,17 +129,17 @@ pipeline {
 
             steps {
                 script {
-                    sh 'cat $(worker_node_ip)'
-                    sh 'sed -i "s|\\(http://\\)[^:]*\\(:8\\)|\\1$(cat lb_dns)\\2|" frontend/index.html'
-                    sh 'cat frontend/index.html' 
+                sh 'cat $(worker_node_ip)'
+                    
+                sh 'cat frontend/index.html' 
 
-                    sh 'sed -i "s|\\(http://\\)[^\"]*|\\1$(cat lb_dns)|" product-service/src/main/java/com.example.product/CorsConfig.java'
-                    sh 'cat product-service/src/main/java/com.example.product/CorsConfig.java'
-                    sh 'sed -i "s|\\(http://\\)[^\"]*|\\1$(cat lb_dns)|" user-service/src/main/java/com.example.user/CorsConfig.java'
-                    sh 'cat user-service/src/main/java/com.example.user/CorsConfig.java'
+                    
+                sh 'cat product-service/src/main/java/com.example.product/CorsConfig.java'
+                    
+                sh 'cat user-service/src/main/java/com.example.user/CorsConfig.java'
 
-                    sh 'docker build -t front_end:latest -f Dockerfile.frontend .'
-                    withDockerRegistry([credentialsId: 'Gitlab_Reg_Access', url: 'https://registry.gitlab.com']) {
+                sh 'docker build -t front_end:latest -f Dockerfile.frontend .'
+                withDockerRegistry([credentialsId: 'Gitlab_Reg_Access', url: 'https://registry.gitlab.com']) {
                         sh 'docker tag front_end:latest registry.gitlab.com/hamrashilar/spring/front_end:latest'
                         sh 'docker push registry.gitlab.com/hamrashilar/spring/front_end:latest'
                     }
@@ -158,12 +158,12 @@ pipeline {
            
               script {
                     sh 'cat $(worker_node_ip)'
-                    sh 'sed -i "s|\\(http://\\)[^:]*\\(:8\\)|\\1$(cat lb_dns)\\2|" frontend/index.html'
+                    
                     sh 'cat frontend/index.html' 
                     
-                    sh 'sed -i "s|\\(http://\\)[^\"]*|\\1$(cat lb_dns)|" product-service/src/main/java/com.example.product/CorsConfig.java'
+                    
                     sh 'cat product-service/src/main/java/com.example.product/CorsConfig.java'
-                    sh 'sed -i "s|\\(http://\\)[^\"]*|\\1$(cat lb_dns)|" user-service/src/main/java/com.example.user/CorsConfig.java'
+                    
                     sh 'cat user-service/src/main/java/com.example.user/CorsConfig.java'
 
                     sh 'apk add curl'
