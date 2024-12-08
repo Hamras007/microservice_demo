@@ -4,6 +4,7 @@ metadata:
   name: product-app-service
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-type: "alb"
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "HTTP"
 spec:
   selector:
     app: product-app
