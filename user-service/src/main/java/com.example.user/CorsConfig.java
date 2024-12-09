@@ -13,7 +13,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("k8s-nlb-1746797201.ap-south-1.elb.amazonaws.com")
+                        .allowedOrigins("http://k8s-nlb-1746797201.ap-south-1.elb.amazonaws.com")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
