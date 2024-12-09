@@ -27,7 +27,7 @@ pipeline {
         }
 
         stage('Update ips ') {
-            agent {
+            agent { 
         docker { 
             image 'alpine:latest'
             args '--user root' 
