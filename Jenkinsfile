@@ -74,7 +74,7 @@ pipeline {
             steps {
                 script {
                 sh 'cat $(worker_node_ip)'
-               
+                sh 'sed -i "s|\\(http://\\)[^:]*\\(:8\\)|\\1$(cat lb_dns)\\2|" frontend/index.html'
                 sh 'cat frontend/index.html'
 
                 
@@ -102,7 +102,7 @@ pipeline {
             steps {
                 script {
                     sh 'cat $(worker_node_ip)'
-                    
+                    sh 'sed -i "s|\\(http://\\)[^:]*\\(:8\\)|\\1$(cat lb_dns)\\2|" frontend/index.html'
                     sh 'cat frontend/index.html' 
 
                    
@@ -130,7 +130,7 @@ pipeline {
             steps {
                 script {
                 sh 'cat $(worker_node_ip)'
-                    
+                sh 'sed -i "s|\\(http://\\)[^:]*\\(:8\\)|\\1$(cat lb_dns)\\2|" frontend/index.html'   
                 sh 'cat frontend/index.html' 
 
                     
@@ -158,7 +158,7 @@ pipeline {
            
               script {
                     sh 'cat $(worker_node_ip)'
-                    
+                    sh 'sed -i "s|\\(http://\\)[^:]*\\(:8\\)|\\1$(cat lb_dns)\\2|" frontend/index.html'
                     sh 'cat frontend/index.html' 
                     
                     
